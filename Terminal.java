@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.Scanner;
+
 import game.Game;
 
 public class Terminal {
@@ -9,17 +10,23 @@ public class Terminal {
 	private Scanner scanner;
 
 	public void run() {
+		// TODO: Write all game logic in here.
 		game = new Game();
+		game.start();
 		scanner = new Scanner(System.in);
-		if(!game.isEnd()){
+		while(!game.isEnd()){
 			System.out.println(game.getCurrentPlayerName() + "'s turn");
 			System.out.print("Row: ");
 			int row = scanner.nextInt();
 			System.out.print("Col: ");
 			int col = scanner.nextInt();
-			
 			game.currentPlayerTakesAction(row,col);
+			renderBoard(game);
 		}
+		System.out.println("Winner is" + game.getWinnerName());
+
+		
+	}
 
 	private void renderBoard(Game game) {
 		int size = game.getBoardSize();
