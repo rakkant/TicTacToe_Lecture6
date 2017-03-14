@@ -1,6 +1,8 @@
 package ui;
 
 import java.awt.BorderLayout;
+
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -31,9 +33,11 @@ public class Gui extends JFrame {
 
 	public void start() {
 		game = new Game();
+		game.start();
 		// TODO: Start the game
 		pack();
 		setVisible(true);
+		
 	}
 
 	private void initComponents() {
@@ -47,6 +51,8 @@ public class Gui extends JFrame {
 				drawSymbols(g);
 			}
 		};
+		
+		
 		mainPanel.setPreferredSize(new Dimension(WINDOW_SIZE, WINDOW_SIZE));
 		mainPanel.addMouseListener(new MouseHandler());
 		setLayout(new BorderLayout());
@@ -97,13 +103,17 @@ public class Gui extends JFrame {
 		public void mousePressed(MouseEvent e) {
 			int row = e.getY() / squareSize();
 			int col = e.getX() / squareSize();
-			// TODO: Complete the logic of the game here
+			game.currentPlayerTakesAction(row, col);
+			mainPanel.repaint();
+			if(game.isEnd())
+			showGameOverMessgage();
 		}	
 	}
 	
 	public static void main(String[] args) {
 		Gui gui = new Gui();
 		gui.start();
+		
 	}
 
 }
