@@ -41,6 +41,7 @@ public class GameServer extends Observable {
 		}
 
 		public void connected(Connection arg0) {
+			System.out.println("Connected");
 			setChanged();
 			notifyObservers(Network.CONNECT);
 		}
